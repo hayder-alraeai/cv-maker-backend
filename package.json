@@ -4,6 +4,7 @@
   "description": "A cv maker project make it possible to registered users to create cv and download it.",
   "main": "app.js",
   "scripts": {
+    "start": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -22,5 +23,16 @@
   "bugs": {
     "url": "https://github.com/hayder-alraeai/cv-maker-backend/issues"
   },
-  "homepage": "https://github.com/hayder-alraeai/cv-maker-backend#readme"
+  "homepage": "https://github.com/hayder-alraeai/cv-maker-backend#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  },
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "express-pdf": "^1.2.2",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.12.13"
+  }
 }
