@@ -1,0 +1,26 @@
+{
+  "name": "cv-maker-backend",
+  "version": "1.0.0",
+  "description": "A cv maker project make it possible to registered users to create cv and download it.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hayder-alraeai/cv-maker-backend.git"
+  },
+  "keywords": [
+    "cv",
+    "maker",
+    "cvmaker",
+    "cv-maker",
+    "backend"
+  ],
+  "author": "Hayder Alraeai",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hayder-alraeai/cv-maker-backend/issues"
+  },
+  "homepage": "https://github.com/hayder-alraeai/cv-maker-backend#readme"
+}
