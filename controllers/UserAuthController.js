@@ -18,7 +18,7 @@ exports.login = async(req, res) => {
             if(!result){
                 return res.status('404').json({
                     status: 'faild',
-                    message: 'from pass check Username or password is incorrect'
+                    message: 'Username or password is incorrect'
                 })
             }
             // const token = jwt.sign({userId: user.id, email: user.email, exp: Math.floor(Date.now() / 1000) + 60}, process.env.JWT_SECRET)

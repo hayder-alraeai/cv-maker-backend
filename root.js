@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const userAuthRouter = require('./routes/UserAuthRoute')
 dotenv.config({path: `${__dirname}/config.env`})
 const UserRouter = require('./routes/UserRoute')
+const cors = require('cors');
 //connection to database
 const DB = process.env.DATABASE.replace('<PASSWORD>', process.env.DATABASE_PASSWORD)
 mongoose.connect(DB, {
@@ -15,6 +16,7 @@ mongoose.connect(DB, {
 }).then(con => console.log('Connection is succeded...')).catch(err => console.log(err))
 
 //Middlewares
+app.use(cors());
 app.use(express.json());
 //Users endpoints CRUD
 app.use('/api/v1/users', UserRouter)
