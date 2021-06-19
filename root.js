@@ -21,5 +21,8 @@ app.use(express.json());
 //Users endpoints CRUD
 app.use('/api/v1/users', UserRouter)
 app.use('/api/v1/login', userAuthRouter)
-
+app.use('/api/v1/test', (req, res, next) => {
+    res.send('is running ...')
+    next()
+})
 exports.app = app;
