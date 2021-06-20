@@ -26,7 +26,7 @@ exports.getUser = (req, res, next) => {
     })
 }
 exports.createUser = async(req, res, next) => {
-    if(UserModel.User.findOne(user => user.email === req.body.email)) return res.status(401).json({status: 'Bad request', message: 'This email is already taken, please login instead!'})
+    // if(await UserModel.User.findOne(user => user.email === req.body.email)) return res.status(401).json({status: 'Bad request', message: 'This email is already taken, please login instead!'})
     UserModel.User({
         firstName: req.body.firstName,
         lastName: req.body.lastName,
