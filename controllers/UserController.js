@@ -1,6 +1,6 @@
 const UserModel = require('../models/UserModel')
 const bcrypt = require('bcrypt')
-
+const main = require('../service/mailer')
 
 exports.getUsers = (req, res, next) => {
     UserModel.User.find().then((users) => {
@@ -26,12 +26,20 @@ exports.getUser = (req, res, next) => {
     })
 }
 exports.createUser = async(req, res, next) => {
+    if(UserModel.User.findOne(user => user.email === req.body.email)) return res.status(401).json({status: 'Bad request', message: 'This email is already taken, please login instead!'})
     UserModel.User({
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         email: req.body.email,
         password: await bcrypt.hash(req.body.password, 12)
-    }).save().then((user => res.status(201).json({status: 'success', message: 'created', user})))
+    })
+    .save()
+    .then((user) => {
+        const body = `Click this link https://${req.headers.host}/api/v1/verify/${user.id} to verify your account!`
+        main(user.email, 'Email Verification', body)
+        return user
+    })
+    .then((user => res.status(201).json({status: 'success', message: 'created', user})))
     .catch(err => {
         console.log(err);
         return res.status(401)

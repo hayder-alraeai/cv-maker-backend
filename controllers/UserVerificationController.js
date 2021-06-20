@@ -1,0 +1,21 @@
+const UserModel = require('../models/UserModel')
+exports.verifyUser = (req, res, next) => {
+    if(req.body.password) return res.status(400).json({status: 'badrequest', message: 'Leo blir arg..'})
+    if(!req.params.id) return res.status(400).json({status: 'faile', message: 'User is not found!'})
+    UserModel.User.findByIdAndUpdate(req.params.id, {isEnabled: true})
+    .then( user => {
+        if(user.isEnabled){
+            res.status(400).json({status: 'Bad request', message: 'User is already verified!'})
+        }
+        res.status(200).json({
+            status: 'success',
+            user 
+        })
+    })
+    .catch(err => {
+        console.log(err);
+        return res.status(401)
+        .json({status: 'faile', message: err})
+    })
+
+}

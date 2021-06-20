@@ -21,6 +21,12 @@ exports.login = async(req, res) => {
                     message: 'Username or password is incorrect'
                 })
             }
+            if(!user.isEnabled){
+                return res.status('401').json({
+                    status: 'unauthorized',
+                    message: 'Yout account is not verified! Please verify your email address and try login again!'
+                })
+            }
             // const token = jwt.sign({userId: user.id, email: user.email, exp: Math.floor(Date.now() / 1000) + 60}, process.env.JWT_SECRET)
             const token = jwt.sign({userId: user.id, email: user.email, exp: Math.floor(Date.now() / 1000) + (60 * 60) * 24 * 90}, process.env.JWT_SECRET)
             return res.status('200').json({
