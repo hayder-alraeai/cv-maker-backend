@@ -9,7 +9,7 @@ exports.verifyUser = (req, res, next) => {
         }
         res.status(200).json({
             status: 'success',
-            user 
+            message: 'User has been verified' 
         })
     })
     .catch(err => {

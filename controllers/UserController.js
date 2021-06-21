@@ -26,7 +26,7 @@ exports.getUser = (req, res, next) => {
     })
 }
 exports.createUser = async(req, res, next) => {
-    // if(await UserModel.User.findOne(user => user.email === req.body.email)) return res.status(401).json({status: 'Bad request', message: 'This email is already taken, please login instead!'})
+    if(await UserModel.User.findOne({email: req.body.email})) return res.status(400).json({status: 'bad Request', message: 'This email address is already taken!'})
     UserModel.User({
         firstName: req.body.firstName,
         lastName: req.body.lastName,
@@ -35,7 +35,12 @@ exports.createUser = async(req, res, next) => {
     })
     .save()
     .then((user) => {
-        const body = `Click this link https://${req.headers.host}/api/v1/verify/${user.id} to verify your account!`
+        //            <p>Click this link https://${req.headers.host}/api/v1/verify/${user.id} to verify your account!</p>
+        const body = `
+            <h1>Hello, </h1>
+            <p>Thank you for your registration.</p>
+            <p>Click this link ${process.env.FRONTEND_BASE_URL}/verify/${user.id} to verify your account!</p>
+        `
         main(user.email, 'Email Verification', body)
         return user
     })
@@ -62,7 +67,8 @@ exports.deleteUser = (req, res, next) => {
     })
 }
 exports.updateUser = (req, res, next) => {
-    if(req.body.password) return res.status(400).json({status: 'badrequest', message: 'Leo blir arg..'})
+    if(req.body.password) return res.status(400).json({status: 'bad request', message: 'Cannot update password'})
+    if(req.body.isEnabled) return res.status(400).json({status: 'bad request', message: 'Cannot enable a user'})
     UserModel.User.findByIdAndUpdate(req.params.id, req.body)
     .then( user => {
         res.status(200).json({
