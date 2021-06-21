@@ -12,6 +12,10 @@ const UserSchema = new mongoose.Schema({
         select: false,
         minLength: 8,
         required: [true, 'Password is required!']
+    },
+    isEnabled: {
+        type: Boolean,
+        default: false
     }
 })
 exports.User = mongoose.model('User', UserSchema)
