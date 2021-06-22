@@ -6,7 +6,7 @@ const password = process.env.EMAIL_PASSWORD
 async function main(toEmail, subject, body) {
   // create reusable transporter object using the default SMTP transport
   let transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
+    host: "send.one.com",
     port: 465,
     secure: true, // true for 465, false for other ports
     auth: {
