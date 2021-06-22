@@ -18,7 +18,7 @@ async function main(toEmail, subject, body) {
   // send mail with defined transport object
   try{
     await transporter.sendMail({
-      from: `Hayder Alraeai: <${username}>`, // sender address
+      from: `CV MAKER: <${username}>`, // sender address
       to: toEmail, // list of receivers
       subject: subject, // Subject line
       html: body, // html text body
