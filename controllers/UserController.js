@@ -10,8 +10,7 @@ exports.getUsers = (req, res, next) => {
             data: users.length,
             users
         })
-    })
-    
+    })    
 }
 exports.getUser = (req, res, next) => {
     UserModel.User.findById(req.params.id).then((user) => {

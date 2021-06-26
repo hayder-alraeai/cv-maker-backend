@@ -3,6 +3,7 @@ const app = express();
 const dotenv = require('dotenv')
 const mongoose = require('mongoose');
 const userAuthRouter = require('./routes/UserAuthRoute')
+const UserDetailsRoute = require('./routes/UserDetailsRoute')
 dotenv.config({path: `${__dirname}/config.env`})
 const UserRouter = require('./routes/UserRoute')
 const UserVerificationRoute = require('./routes/UserVerificationRoute')
@@ -23,6 +24,7 @@ app.use(express.json());
 app.use('/api/v1/users', UserRouter)
 app.use('/api/v1/login', userAuthRouter)
 app.use('/api/v1/verify', UserVerificationRoute)
+app.use('/api/v1/user-details', UserDetailsRoute)
 app.use('/api/v1/test', (req, res, next) => {
     res.send('is running ...')
     next()
