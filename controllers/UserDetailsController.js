@@ -13,9 +13,16 @@ exports.getUserDetails = (req, res, next) => {
         .json({status: 'faile', message: err})
     })
 }
+exports.addWork = async(req, res, next) => {
+    console.log('trigged');
+    if(await UserDetails.UserDetails.findOne({userId: req.params.id})){
+        await UserDetails.UserDetails.findOneAndUpdate({userId: req.params.id}, {
+            workExperiences: req.body.workExperiences,
+        }, {returnOriginal: false})
+    }
+}
 exports.createUserDetails = async(req, res, next) => {
     if(await UserDetails.UserDetails.findOne({userId: req.params.id})){
-        console.log('excuted!!');
         await UserDetails.UserDetails.findOneAndUpdate({userId: req.params.id},{
             firstName: req.body.firstName,
             lastName: req.body.lastName,
@@ -32,7 +39,8 @@ exports.createUserDetails = async(req, res, next) => {
             maritalStatus: req.body.maritalStatus,
             linkedIn: req.body.linkedIn,
             website: req.body.website,
-            aboutMe: req.body.aboutMe
+            aboutMe: req.body.aboutMe,
+            workExperiences: req.body.workExperiences,
         }, {returnOriginal: false})
     }else{
         UserDetails.UserDetails({
@@ -52,7 +60,8 @@ exports.createUserDetails = async(req, res, next) => {
             maritalStatus: req.body.maritalStatus,
             linkedIn: req.body.linkedIn,
             website: req.body.website,
-            aboutMe: req.body.aboutMe
+            aboutMe: req.body.aboutMe,
+            workExperiences: req.body.workExperiences,
         })
         .save()
         .then((userDetails => res.status(201).json({status: 'success', message: 'created', userDetails})))

@@ -1,4 +1,13 @@
 const mongoose = require('mongoose')
+
+const workSchema = mongoose.Schema({
+    title: String,
+    city: String,
+    employer: String,
+    startDate: Date,
+    endDate: Date,
+    description: String
+})
 const UserSchema = new mongoose.Schema({
     userId: String,
     firstName: {
@@ -22,6 +31,7 @@ const UserSchema = new mongoose.Schema({
     maritalStatus: String,
     linkedIn: String,
     website: String,
-    aboutMe: String
+    aboutMe: String,
+    workExperiences: [workSchema],
 })
 exports.UserDetails = mongoose.model('UserDetails', UserSchema)
